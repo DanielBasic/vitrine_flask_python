@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+
+  <title>Lojinha da Pamonha</title>
+</head>
+
+<body>
+
+  <header>
+    <span class="title">Lojinha da pamonha</span>
+    <form action="/ad_product" method="POST">
+      <input type="text" placeholder="Nome do novo produto" name="name_nw_product">
+      <input type="number" placeholder="Preço do produto" min="0" name="price_nw_product">
+      <button type="submit" id="adicionar">Adicionar</button>
+    </form>
+  </header>
+
+  <div class="container">
+    <ul>
+      {% for p in vitrine %}
+          <form action="/update/{{ p.id }}", method="POST">
+
+            <li class="product"> <input name="name_nw_product" value="{{ p.title }}">
+            <input name="price_nw_product" value="{{ p.price }}">
+            <div class="actions">
+                <a href="/delete/{{ p.id }}" style="color: red">🗑</a>
+                <button type="submit",>Editar</button>
+            </div>
+          </form>
+            </li> 
+          
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>

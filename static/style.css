@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #0466c8;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-image: url(corn.png);
+}
+
+.container {
+  min-width: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.title {
+  font-size: 7vh;
+  color: aliceblue;
+  font-weight: bold;
+  display: flex;
+}
+
+header {
+  background-color: #001233;
+  height: 28vh;
+  border-radius: 0 0 10vh 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.product {
+  width: 50vh;
+  max-width: 100%;
+  background-color: white;
+  box-shadow: 0px 0px 3px 0 #222;
+  border-radius: 5vh;
+  padding: 3vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2vh 0;
+}
+
+input {
+  border-radius: 10vh;
+  padding: 0.5vh 1vh;
+  border: 1px solid #5555;
+
+}
+
+input:focus {
+  outline: none;
+}
+
+form button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 2vh;
+}
+
+button#adicionar {
+  background: none;
+  color: white;
+  cursor: pointer;
+  font-size: 2vh;
+  border-radius: 10vh;
+  padding: 0.5vh 1vh;
+  border: 1px solid white;
+}
+
+a {
+  text-decoration: none;
+  font-size: 2vh
+}
