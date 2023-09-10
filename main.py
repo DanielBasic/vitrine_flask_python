@@ -2,12 +2,16 @@ import os
 from flask import Flask
 from database import db
 from controllers import VitrineController, UserController
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SECRET_KEY'] = 'secret'
 
 db.init_app(app)
+
+sentry_sdk.init('YOUR_DSN_HERE', integrations=[FlaskIntegration()])
 
 @app.route("/")
 def index():

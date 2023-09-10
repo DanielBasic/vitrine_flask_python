@@ -2,12 +2,13 @@ from flask import render_template, request, redirect, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import Vitrine, db, User
 
+
 class VitrineController():
   def index():
     if 'user_id' not in session:
       return redirect('/login')
     user_id = session['user_id']
-    vitrine = Vitrine.query.all()
+    vitrine = Vitrine.query.filter_by(user_id = user_id).all()
     return render_template("index.html", vitrine = vitrine)
 
   def ad_product():
@@ -17,7 +18,7 @@ class VitrineController():
 
     name_nw_product = request.form.get("name_nw_product")
     price_nw_product = request.form.get("price_nw_product")
-    new_product = Vitrine(title = name_nw_product, price = price_nw_product)
+    new_product = Vitrine(title = name_nw_product, price = price_nw_product, user_id = user_id)
 
     db.session.add(new_product)
     db.session.commit()
@@ -28,8 +29,9 @@ class VitrineController():
       return redirect('/login')
 
     product = Vitrine.query.filter_by(id=id).first()
-    db.session.delete(product)
-    db.session.commit()
+    if product:
+      db.session.delete(product)
+      db.session.commit()
     return redirect("/")
 
   def update(id):
@@ -40,6 +42,10 @@ class VitrineController():
     title = request.form.get("name_nw_product")
     product.title = title
     price = request.form.get("price_nw_product")
+    if len(price):
+      price = 0
+    elif not price.isnumeric():
+      price = product.price
     product.price = price
     
     db.session.commit()
@@ -83,3 +89,4 @@ class UserController():
       session.pop('user_id', None)
       return redirect('/')
   
+
